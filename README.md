@@ -24,18 +24,18 @@ Initialize: In this step, a typical shell would read and execute its configurati
 Interpret: Next, the shell reads commands from stdin (which could be interactive, or a file) and executes them.
 Terminate: After its commands are executed, the shell executes any shutdown commands, frees up any memory, and terminates.
 
-**Basic Loop of a shell :**
+#**Basic Loop of a shell :**
 **Read:** Read the command from standard input.
 **Parse:** Separate the command string into a program and arguments.
 **Execute:** Run the parsed command.
 
-**Reading and Parsing :**
+#**Reading and Parsing :**
 In a system like a shell, one doesn't know the amount of text or characters coming in as input hence a line is read by first allocating some buffer space in the
 heap memory using the malloc function, and then when it is filled we allocate a double sized memory than current one, this changes the amortized cost of each 
 addition to O(1) as it is similar to vector implementation in c++.
 When the line is taken as input it is then broken into parts such as command and arguements.
 
-**Core :**
+#**Core :**
 The main function of shell is to start a process :
 There are only two ways of starting processes on Unix. The first one is by being Init. When a Unix computer boots, its kernel is loaded. Once it is loaded and 
 initialized, the kernel starts only one process, which is called Init. This process runs for the entire length of time that the computer is on, and it manages to
@@ -75,7 +75,7 @@ parent needs to wait for the command to finish running. We use waitpid() to wait
 error code), or it can be killed by a signal. So, we use the macros provided with waitpid() to wait until either the processes are exited or killed. Then, the
 function finally returns a 1, as a signal to the calling function that we should prompt for input again.
 
-**Builtins Supported** 
+#**Builtins Supported** 
 Some commands are built right into the shell for example , If you want to change directory, you need to use the function chdir(). The thing is, the current 
 directory is a property of a process. So, if you wrote a program called cd that changed directory, it would just change its own current directory, and then 
 terminate. Its parent process’s current directory would be unchanged. Instead, the shell process itself needs to execute chdir(), so that its own current directory
@@ -90,10 +90,10 @@ So, it makes sense that we need to add some commands like cd , exit , help , his
 
 The execute function calls a command if it is a builtin or creates another process if it is not.
 
+For Implementing the History Command: A Linked List has been used which is made up of a user defined data type Node, Node contains a string that has the name of the command and a pointer to the next Node , the Last Node points to Null. The add_to_hist() is called to put the Node in Linked List, and when the history command is run in the shell, the Linked List is Printed.
 
 
-
-->Made By : Vardaan Dua 
-->Student : Btech CSE - 2025 (IIT-R)
-->Enrollment Number : 21115155
-->Email : v_dua@cs.iitr.ac.in
+Made By : Vardaan Dua 
+Student : Btech CSE - 2025 (IIT-R)
+Enrollment Number : 21115155
+Email : v_dua@cs.iitr.ac.in
