@@ -20,7 +20,7 @@ Steps to run :
    (here /mnt/c/Users/hp/Desktop/shell/  uses all the files in the folder shell for compilation , you can add path to this folder as in your device).
 
 
-Made By : Vardaan Dua
-Student : Btech CSE - 2025 (IIT-R)
-Enrollment Number : 21115155
-Email : v_dua@cs.iitr.ac.in
+->Made By : Vardaan Dua 
+->Student : Btech CSE - 2025 (IIT-R)
+->Enrollment Number : 21115155
+->Email : v_dua@cs.iitr.ac.in
