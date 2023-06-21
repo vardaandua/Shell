@@ -24,16 +24,18 @@ Initialize: In this step, a typical shell would read and execute its configurati
 Interpret: Next, the shell reads commands from stdin (which could be interactive, or a file) and executes them.
 Terminate: After its commands are executed, the shell executes any shutdown commands, frees up any memory, and terminates.
 
-Basic Loop of a shell :
-Read: Read the command from standard input.
-Parse: Separate the command string into a program and arguments.
-Execute: Run the parsed command.
+**Basic Loop of a shell :**
+**Read:** Read the command from standard input.
+**Parse:** Separate the command string into a program and arguments.
+**Execute:** Run the parsed command.
 
-Reading and Parsing :
-In a system like a shell, one doesn't know the amount of text or characters coming in as input hence a line is read by first allocating some buffer space in the heap memory using the malloc function, and then when it is filled we allocate a double sized memory than current one, this changes the amortized cost of each addition to O(1) as it is similar to vector implementation in c++.
+**Reading and Parsing :**
+In a system like a shell, one doesn't know the amount of text or characters coming in as input hence a line is read by first allocating some buffer space in the
+heap memory using the malloc function, and then when it is filled we allocate a double sized memory than current one, this changes the amortized cost of each 
+addition to O(1) as it is similar to vector implementation in c++.
 When the line is taken as input it is then broken into parts such as command and arguements.
 
-Core :
+**Core :**
 The main function of shell is to start a process :
 There are only two ways of starting processes on Unix. The first one is by being Init. When a Unix computer boots, its kernel is loaded. Once it is loaded and 
 initialized, the kernel starts only one process, which is called Init. This process runs for the entire length of time that the computer is on, and it manages to
@@ -73,7 +75,7 @@ parent needs to wait for the command to finish running. We use waitpid() to wait
 error code), or it can be killed by a signal. So, we use the macros provided with waitpid() to wait until either the processes are exited or killed. Then, the
 function finally returns a 1, as a signal to the calling function that we should prompt for input again.
 
-Builtins Supported 
+**Builtins Supported** 
 Some commands are built right into the shell for example , If you want to change directory, you need to use the function chdir(). The thing is, the current 
 directory is a property of a process. So, if you wrote a program called cd that changed directory, it would just change its own current directory, and then 
 terminate. Its parent process’s current directory would be unchanged. Instead, the shell process itself needs to execute chdir(), so that its own current directory
