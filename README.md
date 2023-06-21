@@ -7,7 +7,6 @@ Supported Commands :
 3. help
 4. exit
 5. history
-6. bg
 and a lot of other builtin commands.
 
 
