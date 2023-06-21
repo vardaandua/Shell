@@ -16,8 +16,8 @@ I have used WSL(Windows Subsystem for Linux)
 
 Steps to run :
 1. using the bash terminal to clone the repository
-2. open main.c and run the command in terminal  gcc main.c -o main && "/mnt/c/Users/hp/Desktop/shell/"main
-   (here /mnt/c/Users/hp/Desktop/shell/  uses all the files in the folder shell for compilation , you can add path to this folder as in your device).
+2. open main.c in a code editor and run the command in terminal  gcc main.c -o main && "/mnt/c/Users/hp/Desktop/shell/"main
+   (here /mnt/c/Users/hp/Desktop/shell/ is a path to Shell folder and  uses all the files in the folder shell for compilation , you can add path to this folder as in your device) , or You can directly press the run button over the main.c file 
 
 
 ->Made By : Vardaan Dua 
