@@ -74,6 +74,19 @@ error code), or it can be killed by a signal. So, we use the macros provided wit
 function finally returns a 1, as a signal to the calling function that we should prompt for input again.
 
 Builtins Supported 
+Some commands are built right into the shell for example , If you want to change directory, you need to use the function chdir(). The thing is, the current 
+directory is a property of a process. So, if you wrote a program called cd that changed directory, it would just change its own current directory, and then 
+terminate. Its parent process’s current directory would be unchanged. Instead, the shell process itself needs to execute chdir(), so that its own current directory
+is updated. Then, when it launches child processes, they will inherit that directory too.
+
+if there was a program named exit, it wouldn’t be able to exit the shell that called it. That command also needs to be built into the shell. Also, most shells are 
+configured by running configuration scripts, like ~/.bashrc. Those scripts use commands that change the operation of the shell. These commands could only change
+the shell’s operation if they were implemented within the shell process itself.
+
+
+So, it makes sense that we need to add some commands like cd , exit , help , history in the shell itself.
+
+The execute function calls a command if it is a builtin or creates another process if it is not.
 
 
 
