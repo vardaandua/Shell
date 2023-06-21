@@ -93,7 +93,8 @@ The execute function calls a command if it is a builtin or creates another proce
 For Implementing the History Command: A Linked List has been used which is made up of a user defined data type Node, Node contains a string that has the name of the command and a pointer to the next Node , the Last Node points to Null. The add_to_hist() is called to put the Node in Linked List, and when the history command is run in the shell, the Linked List is Printed.
 
 
-Made By : Vardaan Dua                                                                                                                                                                  
+Made By : Vardaan Dua                                                                                                                                                                
+
 Student : Btech CSE - 2025 (IIT-R)                                                                                                                                                                                                
 
 Enrollment Number : 21115155                                                                                                                                                                                                                                 
