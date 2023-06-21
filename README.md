@@ -18,6 +18,65 @@ Steps to run :
 2. open main.c in a code editor and run the command in terminal  gcc main.c -o main && "/mnt/c/Users/hp/Desktop/shell/"main
    (here /mnt/c/Users/hp/Desktop/shell/ is a path to Shell folder and  uses all the files in the folder shell for compilation , you can add path to this folder as in your device) , or You can directly press the run button over the main.c file 
 
+Understanding shell from top down :
+Three things done by shell in its lifetime.
+Initialize: In this step, a typical shell would read and execute its configuration files. These change aspects of the shell’s behavior.
+Interpret: Next, the shell reads commands from stdin (which could be interactive, or a file) and executes them.
+Terminate: After its commands are executed, the shell executes any shutdown commands, frees up any memory, and terminates.
+
+Basic Loop of a shell :
+Read: Read the command from standard input.
+Parse: Separate the command string into a program and arguments.
+Execute: Run the parsed command.
+
+Reading and Parsing :
+In a system like a shell, one doesn't know the amount of text or characters coming in as input hence a line is read by first allocating some buffer space in the heap memory using the malloc function, and then when it is filled we allocate a double sized memory than current one, this changes the amortized cost of each addition to O(1) as it is similar to vector implementation in c++.
+When the line is taken as input it is then broken into parts such as command and arguements.
+
+Core :
+The main function of shell is to start a process :
+There are only two ways of starting processes on Unix. The first one is by being Init. When a Unix computer boots, its kernel is loaded. Once it is loaded and 
+initialized, the kernel starts only one process, which is called Init. This process runs for the entire length of time that the computer is on, and it manages to
+load up the rest of the processes that one need's for ones computer to be useful.
+
+Since most programs aren’t Init, that leaves only one practical way for processes to get started: the fork() system call. When this function is called, the 
+operating system makes a duplicate of the process and starts them both running. The original process is called the “parent”, and the new one is called the “child”.
+fork() returns 0 to the child process, and it returns to the parent the process ID number (PID) of its child. In essence, this means that the only way for new 
+processes is to start is by an existing one duplicating itself.
+
+When one want to run a new process, one does’t just want another copy of the same program – one wants to run a different program. That’s what the exec() system 
+call is all about. It replaces the current running program with an entirely new one. This means that when we call exec, the operating system stops the process, 
+loads up the new program, and starts that one in its place. A process never returns from an exec() call (unless there’s an error).
+
+With these two system calls, we have the building blocks for how most programs are run on Unix. First, an existing process forks itself into two separate ones. 
+Then, the child uses exec() to replace itself with a new program. The parent process can continue doing other things, and it can even keep tabs on its children, 
+using the system call wait().
+
+The launch function takes the list of arguments that we created earlier. Then, it forks the process, and saves the return value. Once fork() returns, we actually 
+have two processes running concurrently. The child process will take the first if condition (where pid == 0).
+
+In the child process, we want to run the command given by the user. So, we use one of the many variants of the exec system call, execvp. The different variants of
+exec do slightly different things. Some take a variable number of string arguments. Others take a list of strings. Still others let you specify the environment 
+that the process runs with. This particular variant expects a program name and an array (also called a vector, hence the ‘v’) of string arguments (the first one 
+has to be the program name). The ‘p’ means that instead of providing the full file path of the program to run, we’re going to give its name, and let the operating 
+system search for the program in the path.
+
+If the exec command returns -1 (or actually, if it returns at all), we know there was an error. So, we use perror to print the system’s error message, along with 
+our program name, so users know where the error came from. Then, we exit so that the shell can keep running.
+
+The second condition (pid < 0) checks whether fork() had an error. If so, we print it and keep going – there’s no handling that error beyond telling the user and 
+letting them decide if they need to quit.
+
+The third condition means that fork() executed successfully. The parent process will land here. We know that the child is going to execute the process, so the 
+parent needs to wait for the command to finish running. We use waitpid() to wait for the process’s state to change. Unfortunately, waitpid() has a lot of options
+(like exec()). Processes can change state in lots of ways, and not all of them mean that the process has ended. A process can either exit (normally, or with an
+error code), or it can be killed by a signal. So, we use the macros provided with waitpid() to wait until either the processes are exited or killed. Then, the
+function finally returns a 1, as a signal to the calling function that we should prompt for input again.
+
+Builtins Supported 
+
+
+
 
 ->Made By : Vardaan Dua 
 ->Student : Btech CSE - 2025 (IIT-R)
